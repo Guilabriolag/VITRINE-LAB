@@ -181,7 +181,7 @@
             margin: 0 auto 30px;
         }
 
-        /* Vitrine de Projetos (Cards) */
+        /* Vitrine de Projetos (Cards - Acordeão) */
         .grid-projetos {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -195,8 +195,6 @@
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
-            overflow: hidden;
-            position: relative;
         }
 
         .card:hover {
@@ -204,40 +202,27 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        .card .card-info {
-            display: none;
-            margin-top: 20px;
-            text-align: left;
-            animation: fadeIn 0.5s ease-in-out;
+        .card-header {
+            cursor: pointer;
         }
 
-        .card .card-info.active {
+        .card-content {
+            display: none;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+
+        .card-content.expanded {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .card h3 {
-            color: var(--azul-eletrico);
-            font-family: var(--font-principal);
-            margin-top: 0;
-        }
-
-        .card .expand-btn {
-            background: none;
-            color: var(--azul-eletrico);
-            border: none;
-            padding: 0;
+        .card-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
             margin-top: 15px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: underline;
         }
-
+        
         /* Contato */
         .contato {
             background-color: var(--preto);
@@ -353,10 +338,10 @@
                 </div>
                 <nav class="menu">
                     <a href="#">Início</a>
-                    <a href="#hub">HUB <span class="destaque-amarelo">(Em Breve)</span></a>
-                    <a href="#gestao">GESTÃO <span class="destaque-amarelo">(Em Breve)</span></a>
-                    <a href="#marketing">Marketing <span class="destaque-amarelo">(Em Breve)</span></a>
-                    <a href="#games">LABRIGames <span class="destaque-amarelo">(Em Breve)</span></a>
+                    <a href="#hub-section">HUB <span class="destaque-amarelo">(Em Breve)</span></a>
+                    <a href="#gestao-section">GESTÃO <span class="destaque-amarelo">(Em Breve)</span></a>
+                    <a href="#marketing-section">Marketing <span class="destaque-amarelo">(Em Breve)</span></a>
+                    <a href="#games-section">LABRIGames <span class="destaque-amarelo">(Em Breve)</span></a>
                 </nav>
                 <div class="cta-header">
                     <button>Fique por Dentro</button>
@@ -378,43 +363,51 @@
                     <h2>Conheça Nosso Ecossistema</h2>
                     <div class="grid-projetos">
                         
-                        <div class="card" onclick="toggleInfo(this)">
-                            <i class="fa-solid fa-cloud-arrow-up" style="color: var(--azul-eletrico); font-size: 50px; margin-bottom: 15px;"></i>
-                            <h3>HUB</h3>
-                            <div class="card-info">
+                        <div class="card" id="hub-section">
+                            <div class="card-header">
+                                <i class="fa-solid fa-cloud-arrow-up" style="color: var(--azul-eletrico); font-size: 50px; margin-bottom: 15px;"></i>
+                                <h3>HUB</h3>
+                            </div>
+                            <div class="card-content">
                                 <p>Sua central de gerenciamento e colaboração.</p>
-                                <img src="URL_IMAGEM_HUB.jpg" alt="Imagem do HUB" style="width: 100%; border-radius: 5px; margin-top: 10px;">
-                                <button onclick="event.stopPropagation(); window.location.href='#hub';">Conheça o HUB</button>
+                                <img src="URL_IMAGEM_HUB.jpg" alt="Imagem do HUB">
+                                <button>Conheça o HUB</button>
                             </div>
                         </div>
 
-                        <div class="card" onclick="toggleInfo(this)">
-                            <i class="fa-solid fa-gears" style="color: var(--azul-eletrico); font-size: 50px; margin-bottom: 15px;"></i>
-                            <h3>GESTÃO</h3>
-                            <div class="card-info">
+                        <div class="card" id="gestao-section">
+                            <div class="card-header">
+                                <i class="fa-solid fa-gears" style="color: var(--azul-eletrico); font-size: 50px; margin-bottom: 15px;"></i>
+                                <h3>GESTÃO</h3>
+                            </div>
+                            <div class="card-content">
                                 <p>Ferramentas de gestão para otimizar seu negócio.</p>
-                                <img src="URL_IMAGEM_GESTAO.jpg" alt="Imagem do GESTÃO" style="width: 100%; border-radius: 5px; margin-top: 10px;">
-                                <button onclick="event.stopPropagation(); window.location.href='#gestao';">Descubra as Ferramentas</button>
+                                <img src="URL_IMAGEM_GESTAO.jpg" alt="Imagem do GESTÃO">
+                                <button>Descubra as Ferramentas</button>
                             </div>
                         </div>
 
-                        <div class="card" onclick="toggleInfo(this)">
-                            <i class="fa-solid fa-bullhorn" style="color: var(--azul-eletrico); font-size: 50px; margin-bottom: 15px;"></i>
-                            <h3>MARKETING</h3>
-                            <div class="card-info">
+                        <div class="card" id="marketing-section">
+                            <div class="card-header">
+                                <i class="fa-solid fa-bullhorn" style="color: var(--azul-eletrico); font-size: 50px; margin-bottom: 15px;"></i>
+                                <h3>MARKETING</h3>
+                            </div>
+                            <div class="card-content">
                                 <p>Impulsione sua marca com soluções de engajamento digital.</p>
-                                <img src="URL_IMAGEM_MARKETING.jpg" alt="Imagem do Marketing" style="width: 100%; border-radius: 5px; margin-top: 10px;">
-                                <button onclick="event.stopPropagation(); window.location.href='#marketing';">Conheça os Serviços</button>
+                                <img src="URL_IMAGEM_MARKETING.jpg" alt="Imagem do Marketing">
+                                <button>Conheça os Serviços</button>
                             </div>
                         </div>
 
-                        <div class="card" onclick="toggleInfo(this)">
-                            <i class="fa-solid fa-gamepad" style="color: var(--azul-eletrico); font-size: 50px; margin-bottom: 15px;"></i>
-                            <h3>LABRIGames</h3>
-                            <div class="card-info">
+                        <div class="card" id="games-section">
+                            <div class="card-header">
+                                <i class="fa-solid fa-gamepad" style="color: var(--azul-eletrico); font-size: 50px; margin-bottom: 15px;"></i>
+                                <h3>LABRIGames</h3>
+                            </div>
+                            <div class="card-content">
                                 <p>Jogos interativos e personalizados para sua marca.</p>
-                                <img src="URL_IMAGEM_GAMES.jpg" alt="Imagem do LABRIGames" style="width: 100%; border-radius: 5px; margin-top: 10px;">
-                                <button onclick="event.stopPropagation(); window.location.href='#games';">Jogue Agora</button>
+                                <img src="URL_IMAGEM_GAMES.jpg" alt="Imagem do LABRIGames">
+                                <button>Jogue Agora</button>
                             </div>
                         </div>
 
@@ -454,10 +447,10 @@
         <footer>
             <div class="container">
                 <div class="footer-links" style="margin-bottom: 10px;">
-                    <a href="#hub">HUB</a>
-                    <a href="#gestao">GESTÃO</a>
-                    <a href="#marketing">Marketing</a>
-                    <a href="#games">LABRIGames</a>
+                    <a href="#hub-section">HUB</a>
+                    <a href="#gestao-section">GESTÃO</a>
+                    <a href="#marketing-section">Marketing</a>
+                    <a href="#games-section">LABRIGames</a>
                 </div>
                 <p>&copy; 2025 LABRIOLAG. Todos os direitos reservados.</p>
             </div>
@@ -484,29 +477,17 @@
 
             toggleFormBtn.addEventListener('click', () => {
                 contactFormContainer.classList.toggle('open');
-                if (contactFormContainer.classList.contains('open')) {
-                    toggleFormBtn.textContent = 'Ocultar Formulário';
-                } else {
-                    toggleFormBtn.textContent = 'Enviar Mensagem';
-                }
+                toggleFormBtn.textContent = contactFormContainer.classList.contains('open') ? 'Ocultar Formulário' : 'Enviar Mensagem';
             });
-
-            // Lógica para exibir/ocultar info dos cards
-            function toggleInfo(card) {
-                const cardInfo = card.querySelector('.card-info');
-                const isActive = cardInfo.classList.contains('active');
-                
-                // Oculta todas as outras informações de cards
-                document.querySelectorAll('.card-info.active').forEach(info => {
-                    info.classList.remove('active');
+            
+            // Lógica para o acordeão dos cards de projeto
+            const cardHeaders = document.querySelectorAll('.card-header');
+            cardHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const cardContent = header.nextElementSibling;
+                    cardContent.classList.toggle('expanded');
                 });
-                
-                // Se a informação não estava ativa, exibe
-                if (!isActive) {
-                    cardInfo.classList.add('active');
-                }
-            }
-            window.toggleInfo = toggleInfo; // Torna a função acessível no HTML
+            });
 
             // Lógica para rolagem suave para as seções
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -520,4 +501,4 @@
         });
     </script>
 </body>
-</html>
+                        </html>
