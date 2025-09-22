@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LABRIOLAG | Vitrine LAB</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Paleta de Cores e Estilos Base */
+        :root {
+            --azul-eletrico: #0066FF;
+            --amarelo: #FFCC00;
+            --preto: #000000;
+            --branco: #FFFFFF;
+            --cinza-escuro: #1a1a1a;
+            --font-principal: 'Poppins', sans-serif;
+            --font-secundaria: 'Montserrat', sans-serif;
+        }
+
+        /* Estilos do Splash Screen */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--preto);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+        }
+        
+        .splash-screen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .splash-logo {
+            animation: bounceIn 1s ease-in-out;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        /* Estilos Gerais do Site */
+        body {
+            font-family: var(--font-principal);
+            background-color: var(--branco);
+            color: var(--preto);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--preto);
+            transition: color 0.3s ease;
+        }
+        
+        button {
+            background-color: var(--azul-eletrico);
+            color: var(--branco);
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #0052cc;
+            transform: translateY(-2px);
+        }
+
+        /* Destaques e títulos */
+        .destaque-amarelo {
+            color: var(--amarelo);
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-secundaria);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 60px;
+        }
+
+        /* Seções */
+        .section {
+            padding: 80px 0;
+        }
+
+        /* Cabeçalho */
+        header {
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            background-color: var(--branco);
+            z-index: 999;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        nav a {
+            margin-left: 20px;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--azul-eletrico);
+        }
+
+        nav a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: var(--amarelo);
+            transition: width 0.3s ease;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 120px 0;
+            background-color: var(--preto);
+            color: var(--branco);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* Vitrine de Projetos (Cards) */
+        .grid-projetos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: #f4f4f4;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .card .card-info {
+            display: none;
+            margin-top: 20px;
+            text-align: left;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .card .card-info.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card h3 {
+            color: var(--azul-eletrico);
+            font-family: var(--font-principal);
+            margin-top: 0;
+        }
+
+        .card .expand-btn {
+            background: none;
+            color: var(--azul-eletrico);
+            border: none;
+            padding: 0;
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Contato */
+        .contato {
+            background-color: var(--preto);
+            color: var(--branco);
+            text-align: center;
+        }
+
+        .contato h2 {
+            color: var(--amarelo);
+        }
+
+        .contact-form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+            max-height: 0;
+        }
+
+        .contact-form-container.open {
+            max-height: 500px; /* Valor alto para garantir que o formulário caiba */
+        }
+        
+        .contato form input, .contato form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #555;
+            background-color: #333;
+            color: var(--branco);
+        }
+
+        .contato form button {
+            width: 100%;
+        }
+
+        /* Botão Flutuante */
+        .floating-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--amarelo);
+            color: var(--preto);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .floating-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--cinza-escuro);
+            color: #888;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        .footer-links a {
+            color: var(--branco);
+            margin: 0 15px;
+        }
+        
+        .social-icons a {
+            color: var(--amarelo);
+            margin: 0 10px;
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--branco);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+            nav {
+                margin-top: 15px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="splash-screen">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4CCXx5HndzfWbdX3MALYVdkY3QwYlAAFlBY84NL1DUQeDdBDBpA8dDjbZCrymY6llOcWIjAhzfq3mCUTFQTrNVY_b1ibeCYgKTeoT_VsCunxjFZQhpire6rIFZ-zOjfSZXskgkPOWTRce12GqDagAshgpsXEN8yFEr4m52YZDZNHnbiJCgOYi0oig_Yto/s756/20250918_001110.png" alt="Logo LABRIOLAG" class="splash-logo" style="width: 150px;">
+    </div>
+    
+    <div id="content" style="display: none;">
+        <header>
+            <div class="container">
+                <div class="logo">
+                    <a href="#">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4CCXx5HndzfWbdX3MALYVdkY3QwYlAAFlBY84NL1DUQeDdBDBpA8dDjbZCrymY6llOcWIjAhzfq3mCUTFQTrNVY_b1ibeCYgKTeoT_VsCunxjFZQhpire6rIFZ-zOjfSZXskgkPOWTRce12GqDagAshgpsXEN8yFEr4m52YZDZNHnbiJCgOYi0oig_Yto/s756/20250918_001110.png" alt="Logo LABRIOLAG">
+                    </a>
+                </div>
+                <nav class="menu">
+                    <a href="#">Início</a>
+                    <a href="#hub">HUB <span class="destaque-amarelo">(Em Breve)</span></a>
+                    <a href="#gestao">GESTÃO <span class="destaque-amarelo">(Em Breve)</span></a>
+                    <a href="#marketing">Marketing <span class="destaque-amarelo">(Em Breve)</span></a>
+                    <a href="#games">LABRIGames <span class="destaque-amarelo">(Em Breve)</span></a>
+                </nav>
+                <div class="cta-header">
+                    <button>Fique por Dentro</button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="container">
+                    <h1>LABRIOLAG - <br><span class="destaque-amarelo">Laboratório de Ideias Influentes</span></h1>
+                    <p>Criatividade que conecta ideias, pessoas e soluções.</p>
+                    <button onclick="document.getElementById('projetos').scrollIntoView({ behavior: 'smooth' });">Explore Nossos Projetos</button>
+                </div>
+            </section>
+
+            <section id="projetos" class="projetos section">
+                <div class="container">
+                    <h2>Conheça Nosso Ecossistema</h2>
+                    <div class="grid-projetos">
+                        
+                        <div class="card" onclick="toggleInfo(this)">
+                            <i class="fa-solid fa-cloud-arrow-up" style="color: var(--azul-eletrico); font-size: 50px; margin-bottom: 15px;"></i>
+                            <h3>HUB</h3>
+                            <div class="card-info">
+                                <p>Sua central de gerenciamento e colaboração.</p>
+                                <img src="URL_IMAGEM_HUB.jpg" alt="Imagem do HUB" style="width: 100%; border-radius: 5px; margin-top: 10px;">
+                                <button onclick="event.stopPropagation(); window.location.href='#hub';">Conheça o HUB</button>
+                            </div>
+                        </div>
+
+                        <div class="card" onclick="toggleInfo(this)">
+                            <i class="fa-solid fa-gears" style="color: var(--azul-eletrico); font-size: 50px; margin-bottom: 15px;"></i>
+                            <h3>GESTÃO</h3>
+                            <div class="card-info">
+                                <p>Ferramentas de gestão para otimizar seu negócio.</p>
+                                <img src="URL_IMAGEM_GESTAO.jpg" alt="Imagem do GESTÃO" style="width: 100%; border-radius: 5px; margin-top: 10px;">
+                                <button onclick="event.stopPropagation(); window.location.href='#gestao';">Descubra as Ferramentas</button>
+                            </div>
+                        </div>
+
+                        <div class="card" onclick="toggleInfo(this)">
+                            <i class="fa-solid fa-bullhorn" style="color: var(--azul-eletrico); font-size: 50px; margin-bottom: 15px;"></i>
+                            <h3>MARKETING</h3>
+                            <div class="card-info">
+                                <p>Impulsione sua marca com soluções de engajamento digital.</p>
+                                <img src="URL_IMAGEM_MARKETING.jpg" alt="Imagem do Marketing" style="width: 100%; border-radius: 5px; margin-top: 10px;">
+                                <button onclick="event.stopPropagation(); window.location.href='#marketing';">Conheça os Serviços</button>
+                            </div>
+                        </div>
+
+                        <div class="card" onclick="toggleInfo(this)">
+                            <i class="fa-solid fa-gamepad" style="color: var(--azul-eletrico); font-size: 50px; margin-bottom: 15px;"></i>
+                            <h3>LABRIGames</h3>
+                            <div class="card-info">
+                                <p>Jogos interativos e personalizados para sua marca.</p>
+                                <img src="URL_IMAGEM_GAMES.jpg" alt="Imagem do LABRIGames" style="width: 100%; border-radius: 5px; margin-top: 10px;">
+                                <button onclick="event.stopPropagation(); window.location.href='#games';">Jogue Agora</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="contato section">
+                <div class="container">
+                    <h2>Vamos criar algo juntos?</h2>
+                    <p style="max-width: 600px; margin: 0 auto 40px;">Entre em contato conosco ou siga nossas redes para acompanhar as novidades.</p>
+                    
+                    <div class="social-icons" style="margin-bottom: 40px;">
+                        <a href="https://instagram.com/labriolag.hub" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/Guilabriolag" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank" aria-label="E-mail"><i class="fas fa-envelope"></i></a>
+                    </div>
+                    
+                    <button id="toggle-form-btn">Enviar Mensagem</button>
+
+                    <div id="contact-form-container" class="contact-form-container">
+                        <form action="https://submit-form.com/sf_j2jjanbi0jci6074ab00jk6l" method="POST">
+                            <input type="text" name="name" placeholder="Nome" required>
+                            <input type="email" name="email" placeholder="E-mail" required>
+                            <textarea name="message" placeholder="Sua Mensagem" rows="5" required></textarea>
+                            <button type="submit">Enviar</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <div class="floating-button" onclick="document.getElementById('toggle-form-btn').click();">
+            <i class="fas fa-comment-dots"></i>
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="footer-links" style="margin-bottom: 10px;">
+                    <a href="#hub">HUB</a>
+                    <a href="#gestao">GESTÃO</a>
+                    <a href="#marketing">Marketing</a>
+                    <a href="#games">LABRIGames</a>
+                </div>
+                <p>&copy; 2025 LABRIOLAG. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Lógica do Splash Screen
+            const splash = document.querySelector('.splash-screen');
+            const content = document.getElementById('content');
+            setTimeout(() => {
+                splash.classList.add('fade-out');
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                    content.style.display = 'block';
+                    document.body.classList.add('loaded');
+                }, 1000);
+            }, 2000);
+
+            // Lógica para mostrar/ocultar o formulário de contato
+            const toggleFormBtn = document.getElementById('toggle-form-btn');
+            const contactFormContainer = document.getElementById('contact-form-container');
+
+            toggleFormBtn.addEventListener('click', () => {
+                contactFormContainer.classList.toggle('open');
+                if (contactFormContainer.classList.contains('open')) {
+                    toggleFormBtn.textContent = 'Ocultar Formulário';
+                } else {
+                    toggleFormBtn.textContent = 'Enviar Mensagem';
+                }
+            });
+
+            // Lógica para exibir/ocultar info dos cards
+            function toggleInfo(card) {
+                const cardInfo = card.querySelector('.card-info');
+                const isActive = cardInfo.classList.contains('active');
+                
+                // Oculta todas as outras informações de cards
+                document.querySelectorAll('.card-info.active').forEach(info => {
+                    info.classList.remove('active');
+                });
+                
+                // Se a informação não estava ativa, exibe
+                if (!isActive) {
+                    cardInfo.classList.add('active');
+                }
+            }
+            window.toggleInfo = toggleInfo; // Torna a função acessível no HTML
+
+            // Lógica para rolagem suave para as seções
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
