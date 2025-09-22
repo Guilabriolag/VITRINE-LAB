@@ -137,31 +137,6 @@
             height: 40px;
         }
 
-        nav a {
-            margin-left: 20px;
-            position: relative;
-        }
-        
-        nav a:hover {
-            color: var(--azul-eletrico);
-        }
-
-        nav a::after {
-            content: '';
-            display: block;
-            width: 0;
-            height: 2px;
-            background: var(--amarelo);
-            transition: width 0.3s ease;
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
         /* Hero Section */
         .hero {
             text-align: center;
@@ -260,8 +235,61 @@
             width: 100%;
         }
 
-        /* Botão Flutuante */
-        .floating-button {
+        /* Botão Flutuante Principal */
+        .floating-main {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--azul-eletrico);
+            color: var(--branco);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .floating-main.active {
+            transform: rotate(45deg);
+        }
+
+        /* Menu Flutuante */
+        .floating-menu {
+            position: fixed;
+            bottom: 100px;
+            left: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .floating-menu.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .floating-menu a {
+            background-color: var(--cinza-escuro);
+            color: var(--branco);
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        /* Botão de Contato Flutuante */
+        .floating-contact-btn {
             position: fixed;
             bottom: 30px;
             right: 30px;
@@ -280,10 +308,10 @@
             transition: transform 0.3s ease;
         }
 
-        .floating-button:hover {
+        .floating-contact-btn:hover {
             transform: scale(1.1);
         }
-
+        
         /* Rodapé */
         footer {
             background-color: var(--cinza-escuro);
@@ -313,9 +341,6 @@
             header .container {
                 flex-direction: column;
             }
-            nav {
-                margin-top: 15px;
-            }
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -336,15 +361,7 @@
                         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4CCXx5HndzfWbdX3MALYVdkY3QwYlAAFlBY84NL1DUQeDdBDBpA8dDjbZCrymY6llOcWIjAhzfq3mCUTFQTrNVY_b1ibeCYgKTeoT_VsCunxjFZQhpire6rIFZ-zOjfSZXskgkPOWTRce12GqDagAshgpsXEN8yFEr4m52YZDZNHnbiJCgOYi0oig_Yto/s756/20250918_001110.png" alt="Logo LABRIOLAG">
                     </a>
                 </div>
-                <nav class="menu">
-                    <a href="#">Início</a>
-                    <a href="#hub-section">HUB <span class="destaque-amarelo">(Em Breve)</span></a>
-                    <a href="#gestao-section">GESTÃO <span class="destaque-amarelo">(Em Breve)</span></a>
-                    <a href="#marketing-section">Marketing <span class="destaque-amarelo">(Em Breve)</span></a>
-                    <a href="#games-section">LABRIGames <span class="destaque-amarelo">(Em Breve)</span></a>
-                </nav>
                 <div class="cta-header">
-                    <button>Fique por Dentro</button>
                 </div>
             </div>
         </header>
@@ -440,8 +457,19 @@
             </section>
         </main>
         
-        <div class="floating-button" onclick="document.getElementById('toggle-form-btn').click();">
+        <div class="floating-contact-btn" onclick="document.getElementById('toggle-form-btn').click();">
             <i class="fas fa-comment-dots"></i>
+        </div>
+
+        <div class="floating-main">
+            <i class="fa-solid fa-plus"></i>
+        </div>
+
+        <div class="floating-menu">
+            <a href="#hub-section">HUB <span class="destaque-amarelo">(Em Breve)</span></a>
+            <a href="#gestao-section">GESTÃO <span class="destaque-amarelo">(Em Breve)</span></a>
+            <a href="#marketing-section">Marketing <span class="destaque-amarelo">(Em Breve)</span></a>
+            <a href="#games-section">LABRIGames <span class="destaque-amarelo">(Em Breve)</span></a>
         </div>
 
         <footer>
@@ -498,7 +526,16 @@
                     });
                 });
             });
+
+            // Lógica para o botão flutuante principal
+            const floatingMainBtn = document.querySelector('.floating-main');
+            const floatingMenu = document.querySelector('.floating-menu');
+
+            floatingMainBtn.addEventListener('click', () => {
+                floatingMainBtn.classList.toggle('active');
+                floatingMenu.classList.toggle('show');
+            });
         });
     </script>
 </body>
-                        </html>
+</html>
