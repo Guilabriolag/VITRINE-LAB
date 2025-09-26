@@ -1,193 +1,340 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LABRIOLAG | Vitrine LAB</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LABRIOLAG | Laboratório de Ideias</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="icon" type="image/png" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4CCXx5HndzfWbdX3MALYVdkY3QwYlAAFlBY84NL1DUQeDdBDBpA8dDjbZCrymY6llOcWIjAhzfq3mCUTFQTrNVY_b1ibeCYgKTeoT_VsCunxjFZQhpire6rIFZ-zOjfSZXskgkPOWTRce12GqDagAshgpsXEN8yFEr4m52YZDZNHnbiJCgOYi0oig_Yto/s756/20250918_001110.png">
 
-<style>
-:root {
-    --azul-eletrico: #0066FF;
-    --amarelo: #FFCC00;
-    --preto: #000000;
-    --branco: #FFFFFF;
-    --cinza-escuro: #1a1a1a;
-    --font-principal: 'Poppins', sans-serif;
-    --font-secundaria: 'Montserrat', sans-serif;
-}
+    <style>
+        /* Variáveis CSS */
+        :root {
+            --azul-eletrico: #0066FF;
+            --amarelo: #FFCC00;
+            --preto: #000000;
+            --branco: #FFFFFF;
+            --cinza-escuro: #1a1a1a;
+            --cinza-medio: #f0f0f0;
+            --font-principal: 'Poppins', sans-serif;
+            --font-secundaria: 'Montserrat', sans-serif;
+        }
 
-body {
-    font-family: var(--font-principal);
-    background-color: var(--branco);
-    color: var(--preto);
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
+        /* Estilos Globais */
+        body {
+            font-family: var(--font-principal);
+            background-color: var(--branco);
+            color: var(--preto);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
 
-body.loaded { opacity: 1; }
+        body.loaded {
+            opacity: 1;
+        }
 
-header {
-    padding: 20px 0;
-    position: sticky;
-    top: 0;
-    background-color: var(--branco);
-    z-index: 999;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-header .container { display: flex; justify-content: space-between; align-items: center; }
-.logo img { height: 40px; }
+        /* Header */
+        header {
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            background-color: var(--branco);
+            z-index: 999;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-.hero {
-    text-align: center;
-    padding: 120px 20px;
-    background-color: var(--preto);
-    color: var(--branco);
-}
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.hero h1 { font-size: 3rem; margin-bottom: 10px; }
-.hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px; }
-button {
-    background-color: var(--azul-eletrico);
-    color: var(--branco);
-    border: none;
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-button:hover { background-color: #0052cc; transform: translateY(-2px); }
+        .logo img {
+            height: 40px;
+        }
 
-.section { padding: 80px 0; }
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 120px 20px;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1518770660439-4636190ba256?fit=crop&w=1400&h=800&q=80') no-repeat center center/cover;
+            color: var(--branco);
+            position: relative;
+            overflow: hidden;
+        }
 
-.grid-projetos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-}
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
 
-.card {
-    background-color: #f4f4f4;
-    padding: 30px;
-    border-radius: 10px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
 
-.card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .cta-button {
+            background-color: var(--azul-eletrico);
+            color: var(--branco);
+            border: none;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px; /* Borda mais arredondada */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
 
-.card img { width: 100%; border-radius: 5px; margin-top: 15px; }
+        .cta-button:hover {
+            background-color: #0052cc;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
 
-.contato {
-    background-color: var(--preto);
-    color: var(--branco);
-    text-align: center;
-}
+        /* Seções */
+        .section {
+            padding: 80px 0;
+        }
 
-.contato h2 { color: var(--amarelo); }
+        .section h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
 
-footer {
-    background-color: var(--cinza-escuro);
-    color: #888;
-    padding: 20px 0;
-    text-align: center;
-}
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--amarelo);
+            border-radius: 2px;
+        }
 
-.footer-links a { color: var(--branco); margin: 0 15px; }
+        /* Grid de Projetos */
+        .grid-projetos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
 
-.social-icons a {
-    color: var(--amarelo);
-    margin: 0 10px;
-    font-size: 24px;
-    transition: color 0.3s ease;
-}
+        .card {
+            background-color: var(--cinza-medio);
+            border-radius: 15px;
+            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-.social-icons a:hover { color: var(--branco); }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
 
-/* Responsividade */
-@media (max-width: 768px) { .hero h1 { font-size: 2.2rem; } }
-</style>
+        .card-content {
+            padding: 30px;
+        }
+        
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: var(--azul-eletrico);
+        }
+
+        .card p {
+            min-height: 45px;
+        }
+
+        /* Seção Contato */
+        .contato {
+            background-color: var(--preto);
+            color: var(--branco);
+            text-align: center;
+        }
+
+        .contato h2 {
+            color: var(--amarelo);
+        }
+
+        .social-icons a {
+            color: var(--amarelo);
+            margin: 0 15px;
+            font-size: 30px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--branco);
+            transform: scale(1.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--cinza-escuro);
+            color: #aaa;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            color: var(--branco);
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--amarelo);
+        }
+
+        /* Animações e Efeitos */
+        .slide-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .slide-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
+
 <body>
-
-<header>
-    <div class="container">
-        <div class="logo">
-            <a href="#">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4CCXx5HndzfWbdX3MALYVdkY3QwYlAAFlBY84NL1DUQeDdBDBpA8dDjbZCrymY6llOcWIjAhzfq3mCUTFQTrNVY_b1ibeCYgKTeoT_VsCunxjFZQhpire6rIFZ-zOjfSZXskgkPOWTRce12GqDagAshgpsXEN8yFEr4m52YZDZNHnbiJCgOYi0oig_Yto/s756/20250918_001110.png" alt="Logo LABRIOLAG">
-            </a>
-        </div>
-    </div>
-</header>
-
-<main>
-<section class="hero">
-    <div class="container">
-        <h1>LABRIOLAG - <br><span style="color:#FFCC00;">Laboratório de Ideias Influentes</span></h1>
-        <p>Criatividade que conecta ideias, pessoas e soluções.</p>
-        <button onclick="document.getElementById('projetos').scrollIntoView({ behavior: 'smooth' });">Explore Nossos Projetos</button>
-    </div>
-</section>
-
-<section id="projetos" class="section">
-    <div class="container">
-        <h2>Conheça Nossos Projetos</h2>
-        <div class="grid-projetos">
-            <!-- HUB -->
-            <div class="card">
-                <h3>HUB</h3>
-                <img src="https://via.placeholder.com/400x200.png?text=HUB" alt="HUB">
-                <p>Sua central de gerenciamento e colaboração.</p>
-                <button onclick="window.open('https://guilabriolag.github.io/HUB/', '_blank')">Acessar HUB</button>
-            </div>
-            <!-- HypeSats -->
-            <div class="card">
-                <h3>HypeSats</h3>
-                <img src="https://via.placeholder.com/400x200.png?text=HypeSats" alt="HypeSats">
-                <p>Jogue, ganhe Bitcoin e concorra a prêmios.</p>
-                <button onclick="window.open('https://guilabriolag.github.io/HypeSats/', '_blank')">Acessar HypeSats</button>
-            </div>
-            <!-- MimoGames -->
-            <div class="card">
-                <h3>MimoGames</h3>
-                <img src="https://via.placeholder.com/400x200.png?text=MimoGames" alt="MimoGames">
-                <p>Jogos interativos e educativos para todos.</p>
-                <button onclick="window.open('https://guilabriolag.github.io/MimoGames/', '_blank')">Acessar MimoGames</button>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="#">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4CCXx5HndzfWbdX3MALYVdkY3QwYlAAFlBY84NL1DUQeDdBDBpA8dDjbZCrymY6llOcWIjAhzfq3mCUTFQTrNVY_b1ibeCYgKTeoT_VsCunxjFZQhpire6rIFZ-zOjfSZXskgkPOWTRce12GqDagAshgpsXEN8yFEr4m52YZDZNHnbiJCgOYi0oig_Yto/s756/20250918_001110.png" alt="Logo LABRIOLAG">
+                </a>
             </div>
         </div>
-    </div>
-</section>
+    </header>
 
-<section class="contato section">
-    <div class="container">
-        <h2>Vamos criar algo juntos?</h2>
-        <div class="social-icons" style="margin-bottom: 20px;">
-            <a href="https://instagram.com/labriolag.hub" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://github.com/Guilabriolag" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fas fa-envelope"></i></a>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>LABRIOLAG</h1>
+                <h2>Laboratório de Ideias Influentes</h2>
+                <p>Criatividade que conecta ideias, pessoas e soluções para o futuro digital.</p>
+                <button class="cta-button" onclick="document.getElementById('projetos').scrollIntoView({ behavior: 'smooth' });">Explore Nossos Projetos</button>
+            </div>
+        </section>
+
+        <section id="projetos" class="section">
+            <div class="container">
+                <h2>Conheça Nossos Projetos</h2>
+                <div class="grid-projetos">
+                    <div class="card slide-up">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEipBHeX7WcU38g23TvjZrvXuBfFBHe2gw3ukHQn0pYEbdxcDsptsvwdHxqYHyo7453pTA2La3Bn56DpD5aIxQmyGhAzX9pQzoFOSyXhtZqTS6OibbA1gyva8L_f4Y_-XbXlTHwmGePJSN1M_CdLyUUAORsOh1Htlm-9VDYN_U_IEcNRSXgybVH8XJgPyVP6/s817/Clipped_image_20250926_144617.png" alt="HUB - Sua central de gerenciamento e colaboração">
+                        <div class="card-content">
+                            <h3>HUB</h3>
+                            <p>Sua central de gerenciamento e colaboração.</p>
+                            <button class="cta-button" onclick="window.open('https://guilabriolag.github.io/HUB/', '_blank')">Acessar HUB</button>
+                        </div>
+                    </div>
+                    <div class="card slide-up">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg55z9WN6Lwf_uaj_r6Fq3h0WHUrEJvVxuElzYFnhklZOg2J-U6XhlTyD1Zdxh1ANsLiisPT5HU1cK5YlrlsBgTUbLxbaZ-UFViwhdkcw4Hm3FMab0sQ3ty2c8L5rjhax5SlraxKNFfCVtV7iYKFY0fYB2rQsY6wXjKsoa0SWcmeL-sAbl0W21jPNiOybwH/s1536/image_1758852316353.jpeg" alt="HypeSats - Jogue, ganhe Bitcoin e concorra a prêmios.">
+                        <div class="card-content">
+                            <h3>HypeSats</h3>
+                            <p>Jogue, ganhe Bitcoin e concorra a prêmios.</p>
+                            <button class="cta-button" onclick="window.open('https://guilabriolag.github.io/HypeSats/', '_blank')">Acessar HypeSats</button>
+                        </div>
+                    </div>
+                    <div class="card slide-up">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjbtkkZvD6zb0NqHPY1rVgH0y5564RbfkTyWw2PxDNW8WfBdTV7xF0Qu2eIfpRJwTNuYMolaEQY3oAI-2uRnPIEXlEYpNMACpeUxjyHm9BeNp-y48e_9bImvbDWKmk5rQWsaAv3tVpHTMEPhSpyE6pz8X5UGV0-ESW5FlDRonb0aev92eBXLOTrn9MyQXpC/s320/Clipped_image_20250916_133639.png" alt="MimoGames - Jogos interativos e educativos para todos.">
+                        <div class="card-content">
+                            <h3>MimoGames</h3>
+                            <p>Jogos interativos e educativos para todos.</p>
+                            <button class="cta-button" onclick="window.open('https://guilabriolag.github.io/MimoGames/', '_blank')">Acessar MimoGames</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contato section">
+            <div class="container">
+                <h2>Vamos criar algo juntos?</h2>
+                <div class="social-icons" style="margin-bottom: 20px;">
+                    <a href="https://instagram.com/labriolag.hub" target="_blank" aria-label="Instagram da LABRIOLAG"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/Guilabriolag" target="_blank" aria-label="GitHub da LABRIOLAG"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="Enviar um email para LABRIOLAG"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#projetos">Projetos</a>
+                <a href="#contato">Contato</a>
+            </div>
+            <p>&copy; 2025 LABRIOLAG. Todos os direitos reservados.</p>
         </div>
-    </div>
-</section>
+    </footer>
 
-<footer>
-    <div class="container">
-        <p>&copy; 2025 LABRIOLAG. Todos os direitos reservados.</p>
-    </div>
-</footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.body.classList.add('loaded');
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    document.body.classList.add('loaded');
-});
-</script>
+            // Animação de Scroll para os cards
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.2 // A animação dispara quando 20% do elemento está visível
+            });
+
+            document.querySelectorAll('.slide-up').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
 
 </body>
 </html>
